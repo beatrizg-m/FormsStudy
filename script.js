@@ -1,30 +1,41 @@
 const forms = document.querySelector('form');
-const nome = document.getElementById('inputName');
+const nameInput = document.getElementById('inputName');
 const age = document.getElementById('inputAge');
-const button = document.querySelector('button');
-const lista = document.querySelector('ul');
 
-let cadastros = [
+const registration = [
     {
-        nome: 'viviane',
+        name: 'viviane',
         age: 20
     },
     {
-        nome: 'Gabriel',
+        name: 'Gabriel',
         age: 23
     },
     {
-        nome: 'Beatriz',
+        name: 'Beatriz',
         age: 24
     }
 ]
 
 forms.addEventListener('submit', (event) => {
     event.preventDefault();
-    dados = {
-        nome: nome.value,
+    data = {
+        name: nameInput.value,
         age: age.value
     }
-    cadastros.push(dados);
-    console.log(cadastros);
+    registration.push(data);
+    console.log(registration);
+    
+    appendUserRegistration(data.name, data.age);
 })
+
+registration.forEach(item => {
+    appendUserRegistration(item.name, item.age);
+})
+
+function appendUserRegistration(name, age){
+    const liElement = document.createElement('li');
+    const textNode = document.createTextNode(`${name} ${age}`);
+    liElement.appendChild(textNode);
+    document.querySelector('.user-registration').appendChild(liElement);
+}
